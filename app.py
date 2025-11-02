@@ -46,8 +46,12 @@ def get_predominant_color(image_region):
 uploaded_file = st.file_uploader("📸 Envie uma imagem", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="🖼️ Imagem enviada", use_container_width=True)
+    try:
+        image = Image.open(uploaded_file)
+        st.image(np.array(image), caption="🖼️ Imagem enviada", use_container_width=True)
+    except Exception as e:
+        st.error(f"Erro ao abrir a imagem: {e}")
+
 
     st.info("Analisando imagem... aguarde alguns segundos ⏳")
     results = model(image)
