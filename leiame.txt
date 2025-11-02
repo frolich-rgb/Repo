@@ -1,0 +1,45 @@
+Executar este projeto de Visão Computacional (YOLOv8 + Streamlit) em um lugar gratuito e acessível pelo celular é ideal usando a plataforma Streamlit Community Cloud ou, alternativamente, o Hugging Face Spaces.
+
+O Streamlit Community Cloud é o caminho mais direto, pois o código já usa Streamlit.
+
+🚀 Opção 1: Streamlit Community Cloud (Recomendado)
+O Streamlit Community Cloud é um serviço gratuito que hospeda e executa aplicativos Streamlit diretamente, tornando-os acessíveis publicamente por um URL (que você pode abrir no seu celular).
+
+Pré-requisitos:
+Conta no GitHub: Você deve ter uma conta no GitHub.
+
+Repositório (Repo): Você precisa criar um novo repositório público no GitHub e colocar todos os arquivos do projeto nele:
+
+app.py (o código principal)
+
+requirements.txt (as dependências)
+
+Dockerfile (o Streamlit Cloud pode precisar disso devido ao OpenCV/Ultralytics, embora muitas vezes ele detecte automaticamente)
+
+docker-compose.yml (não é necessário para o Streamlit Cloud, mas não atrapalha)
+
+Passos para Implantação:
+Crie a Conta: Acesse a plataforma Streamlit Community Cloud e faça login (geralmente via GitHub).
+
+Novo Aplicativo (New App): Clique em "New app" (Novo aplicativo).
+
+Configure: Preencha os detalhes do seu aplicativo:
+
+Repository (Repositório): Selecione o repositório do GitHub onde você salvou os arquivos do projeto.
+
+Branch (Ramo): Mantenha como main (principal) ou master.
+
+Main file path (Caminho do arquivo principal): Deve ser app.py.
+
+Implante (Deploy): Clique em "Deploy".
+
+O Streamlit Cloud fará o download das dependências (incluindo o modelo YOLOv8) e iniciará o aplicativo. Levará alguns minutos.
+
+✅ Acesso pelo Celular: Assim que a implantação for concluída, a plataforma fornecerá um URL público (ex: https://[seu-usuario]-[seu-app].streamlit.app/). Você pode usar este URL em qualquer navegador no seu celular para acessar o detector de roupas!
+
+⚠️ Nota Importante sobre YOLO/Ultralytics
+Como o projeto usa o modelo YOLOv8 da biblioteca ultralytics, que é pesada, e o Streamlit Cloud tem limites de recursos (RAM/CPU), o aplicativo pode ser lento ou travar em imagens maiores.
+
+Solução (Se travar): Tente usar um modelo YOLO ainda menor, como o yolov8n-cls.pt para classificação (se você não precisar da caixa delimitadora) ou otimizar o código para liberar memória após cada inferência.
+
+Você precisa de ajuda para configurar o repositório no GitHub ou posso te ajudar com a otimização do app.py para rodar no Streamlit Cloud?
