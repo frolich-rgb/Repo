@@ -73,4 +73,29 @@ if uploaded_file is not None:
 
         st.image(annotated_image, caption="🔎 Detecção de objetos", use_column_width=True)
 
-        roupas_detectadas = []_
+        roupas_detectadas = []
+
+        for box in results[0].boxes:
+            cls = int(box.cls[0])
+            obj_name = results[0].names[cls]
+
+            # Considera "person" como roupa genérica
+            if obj_name == "person":
+                x1, y1, x2, y2 = map(int, box.xyxy[0])
+                region = image.crop((x1, y1, x2, y2))
+                color_name = get_predominant_color(region)
+                roupas_detectadas.append(f"camisa {color_name}")
+
+        # ------------------------------------------------------------
+        # 🧥 Resultado final
+        # ------------------------------------------------------------
+        if roupas_detectadas:
+            st.subheader("👕 Roupas identificadas:")
+            for desc in roupas_detectadas:
+                st.success(desc)
+                shein_link = f"https://br.shein.com/pdsearch/{urllib.parse.quote(desc)}/"
+                st.markdown(f"[🛍️ Ver {desc} na Shein Brasil]({shein_link})")
+        else:
+            st.warning("Nenhuma roupa reconhecida.")
+else:
+    st.info("Envie uma imagem para iniciar a análise.")
